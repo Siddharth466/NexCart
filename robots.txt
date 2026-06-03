@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /index2.html
+
+Sitemap: https://nex-cart--siddhartsharma4.replit.app/sitemap.xml

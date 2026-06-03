@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexCart – Shop Smarter</title>
+    <meta name="description" content="NexCart – Discover millions of products at unbeatable prices. Shop electronics, fashion, home & kitchen, sports, and more. Shop Smarter. Live Better.">
+    <meta name="keywords" content="NexCart, online shopping, electronics, fashion, home kitchen, sports, deals, best sellers">
+    <meta name="author" content="Siddharth Sharma">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://nex-cart--siddhartsharma4.replit.app/">
+    <meta property="og:title" content="NexCart – Shop Smarter">
+    <meta property="og:description" content="Discover millions of products at unbeatable prices. Shop Smarter. Live Better.">
+    <meta property="og:url" content="https://nex-cart--siddhartsharma4.replit.app/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="NexCart – Shop Smarter">
+    <meta name="twitter:description" content="Discover millions of products at unbeatable prices. Shop Smarter. Live Better.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="nexcart-icon-3.svg" type="image/x-icon">
+</head>
+<body>
+
+<!-- ── Page Loader ── -->
+<div class="page-loader" id="pageLoader">
+    <div class="loader-logo">Nex<span>Cart</span></div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- ── Toast Notifications ── -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ── Scroll to Top ── -->
+<button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+    <i class="fa-solid fa-chevron-up"></i>
+</button>
+
+<header>
+    <!-- Deals Banner -->
+    <div class="deals-banner">
+        <i class="fa-solid fa-bolt"></i>
+        <span>Flash Sale! Up to <strong>70% OFF</strong> — Ends in:</span>
+        <div class="countdown">
+            <div class="cd-block"><span id="cdH">00</span><small>hrs</small></div>
+            <span class="cd-sep">:</span>
+            <div class="cd-block"><span id="cdM">00</span><small>min</small></div>
+            <span class="cd-sep">:</span>
+            <div class="cd-block"><span id="cdS">00</span><small>sec</small></div>
+        </div>
+        <a href="#products" class="banner-cta">Shop Now</a>
+    </div>
+
+    <!-- Top Navbar -->
+    <div class="navbar">
+        <div class="nav-logo border">
+            <span class="logo-text">Nex<span class="logo-accent">Cart</span></span>
+        </div>
+
+        <div class="nav-add border">
+            <p class="add1">Deliver To</p>
+            <div class="add-icon">
+                <i class="fa-solid fa-location-dot"></i>
+                <p class="add2">Your City</p>
+            </div>
+        </div>
+
+        <div class="nav-search">
+            <select class="search-select" id="searchCategory">
+                <option value="all">All</option>
+                <option value="gaming">Electronics</option>
+                <option value="fashion">Fashion</option>
+                <option value="books">Books</option>
+                <option value="sports">Sports</option>
+            </select>
+            <input placeholder="Search NexCart..." class="input" id="searchInput" oninput="liveSearch()">
+            <div class="search-icon" onclick="liveSearch()">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+        </div>
+
+        <a href="index2.html#login" class="nav-item border" style="text-decoration:none;color:inherit;">
+            <i class="fa-solid fa-user nav-icon"></i>
+            <div>
+                <p class="nav-small">Hello, Sign In</p>
+                <p class="nav-bold">Account</p>
+            </div>
+        </a>
+
+        <div class="nav-item border">
+            <i class="fa-solid fa-box nav-icon"></i>
+            <div>
+                <p class="nav-small">Returns &</p>
+                <p class="nav-bold">Orders</p>
+            </div>
+        </div>
+
+        <a href="index2.html#signup" class="nav-item border" style="text-decoration:none;color:inherit;">
+            <i class="fa-solid fa-user-plus nav-icon"></i>
+            <div>
+                <p class="nav-small">New here?</p>
+                <p class="nav-bold">Create Account</p>
+            </div>
+        </a>
+
+        <div class="nav-item cart-item border" onclick="showToast('Cart feature coming soon!', 'info')">
+            <div class="cart-wrap">
+                <i class="fa-solid fa-cart-shopping nav-icon"></i>
+                <span class="cart-badge" id="cartBadge">0</span>
+            </div>
+            <div>
+                <p class="nav-bold">Cart</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sub Panel -->
+    <div class="panel">
+        <div class="panel-all border-panel">
+            <i class="fa-solid fa-bars"></i>
+            <span>All</span>
+        </div>
+        <div class="panel-ops">
+            <a href="#" onclick="filterProducts('all')">Today's Deals</a>
+            <a href="#">Fresh</a>
+            <a href="#" onclick="filterProducts('gaming'); return false;">Electronics</a>
+            <a href="#">Mobiles</a>
+            <a href="#" onclick="filterProducts('fashion'); return false;">Fashion</a>
+            <a href="#">Home &amp; Kitchen</a>
+            <a href="#" onclick="filterProducts('sports'); return false;">Sports</a>
+            <a href="#">Best Sellers</a>
+            <a href="#">New Releases</a>
+            <a href="#">NexCart Pay</a>
+            <a href="#">Prime</a>
+        </div>
+        <div class="panel-seller border-panel">
+            <i class="fa-solid fa-shop"></i>
+            <span>Become a Seller</span>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Banner -->
+<div class="hero">
+    <div class="hero-overlay reveal">
+        <div class="hero-badge"><i class="fa-solid fa-fire"></i> #1 Shopping Destination</div>
+        <h1>Shop Smarter.<br><span>Live Better.</span></h1>
+        <p>Discover millions of products at unbeatable prices, delivered to your door.</p>
+        <div class="hero-actions">
+            <a href="#products" class="hero-btn">Shop Now <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#" class="hero-btn-ghost">View Deals <i class="fa-solid fa-tag"></i></a>
+        </div>
+        <div class="hero-stats">
+            <div class="h-stat"><strong>10M+</strong><span>Happy Customers</span></div>
+            <div class="h-stat"><strong>50K+</strong><span>Products</span></div>
+            <div class="h-stat"><strong>24/7</strong><span>Support</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- Category Filter -->
+<div class="cat-filter" id="products">
+    <button class="cat-btn active" onclick="filterProducts('all', this)">All</button>
+    <button class="cat-btn" onclick="filterProducts('gaming', this)"><i class="fa-solid fa-gamepad"></i> Gaming</button>
+    <button class="cat-btn" onclick="filterProducts('phones', this)"><i class="fa-solid fa-mobile-screen"></i> Phones</button>
+    <button class="cat-btn" onclick="filterProducts('books', this)"><i class="fa-solid fa-book"></i> Books</button>
+    <button class="cat-btn" onclick="filterProducts('fashion', this)"><i class="fa-solid fa-shirt"></i> Fashion</button>
+    <button class="cat-btn" onclick="filterProducts('home', this)"><i class="fa-solid fa-house"></i> Home</button>
+    <button class="cat-btn" onclick="filterProducts('watches', this)"><i class="fa-solid fa-clock"></i> Watches</button>
+    <button class="cat-btn" onclick="filterProducts('footwear', this)"><i class="fa-solid fa-shoe-prints"></i> Footwear</button>
+    <button class="cat-btn" onclick="filterProducts('sports', this)"><i class="fa-solid fa-dumbbell"></i> Sports</button>
+</div>
+
+<div class="no-results hidden" id="noResults">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <p>No products found. Try a different search or category.</p>
+</div>
+
+<!-- Main Content Cards -->
+<div class="main-content" id="productGrid">
+
+    <div class="content reveal" data-category="gaming">
+        <div class="card-inner">
+            <div class="card-badge sale">60% OFF</div>
+            <div class="co1">
+                <h2>Gaming Accessories</h2>
+                <div class="img1" style="background-image: url('https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=500&auto=format&fit=crop');"></div>
+                <div class="card-footer">
+                    <a href="#" class="content-a">Shop Now <i class="fa-solid fa-chevron-right"></i></a>
+                    <button class="add-cart-btn" onclick="addToCart('Gaming Accessories')"><i class="fa-solid fa-cart-plus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content reveal" data-category="phones">
+        <div class="card-inner">
+            <div class="card-badge hot">HOT</div>
+            <div class="co1">
+                <h2>Top-Brand Smartphones</h2>
+                <div class="img1" style="background-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop');"></div>
+                <div class="card-footer">
+                    <a href="#" class="content-a">Shop Now <i class="fa-solid fa-chevron-right"></i></a>
+                    <button class="add-cart-btn" onclick="addToCart('Smartphones')"><i class="fa-solid fa-cart-plus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content reveal" data-category="books">
+        <div class="card-inner">
+            <div class="card-badge sale">Up to 60% Off</div>
+            <div class="co1">
+                <h2>Up to 60% Off — Books</h2>
+                <div class="img1" style="background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=500&auto=format&fit=crop');"></div>
+                <div class="card-footer">
+                    <a href="#" class="content-a">Shop Now <i class="fa-solid fa-chevron-right"></i></a>
+                    <button class="add-cart-btn" onclick="addToCart('Books')"><i class="fa-solid fa-cart-plus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content reveal" data-category="fashion">
+        <div class="card-inner">
+            <div class="card-badge new">NEW</div>
+            <div class="co1">
+                <h2>Men's Fashion</h2>
+                <div class="img1" style="background-image: url('https://images.unsplash.com/photo-1617137968427-85924c800a22?w=500&auto=format&fit=crop');"></div>
+                <div class="card-footer">
+                    <a href="#" class="content-a">Shop Now <i class="fa-solid fa-chevron-right"></i></a>
+                    <button class="add-cart-btn" onclick="addToCart('Men Fashion')"><i class="fa-solid fa-cart-plus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content reveal" data-category="home">
+        <div class="card-inner">
+            <div class="co1">
+                <h2>Home &amp; Kitchen</h2>
+                <div class="img1" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&auto=format&fit=crop');"></div>
+                <div class="card-footer">
+                    <a href="#" class="content-a">Shop Now <i class="fa-solid fa-chevron-right"></i></a>
+                    <button class="add-cart-btn" onclick="addToCart('Home & Kitchen')"><i class="fa-solid fa-cart-plus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content reveal" data-category="watches">
+        <div class="card-inner">
+            <div class="card-badge hot">HOT</div>
+            <div class="co1">
+                <h2>Top-Brand Watches</h2>
+                <div class="img1" style="background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&auto=format&fit=crop');"></div>
+                <div class="card-footer">
+                    <a href="#" class="content-a">Shop Now <i class="fa-solid fa-chevron-right"></i></a>
+                    <button class="add-cart-btn" onclick="addToCart('Watches')"><i class="fa-solid fa-cart-plus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content reveal" data-category="footwear">
+        <div class="card-inner">
+            <div class="card-badge sale">40% OFF</div>
+            <div class="co1">
+                <h2>Top-Brand Footwear</h2>
+                <div class="img1" style="background-image: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop');"></div>
+                <div class="card-footer">
+                    <a href="#" class="content-a">Shop Now <i class="fa-solid fa-chevron-right"></i></a>
+                    <button class="add-cart-btn" onclick="addToCart('Footwear')"><i class="fa-solid fa-cart-plus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content reveal" data-category="sports">
+        <div class="card-inner">
+            <div class="card-badge new">NEW</div>
+            <div class="co1">
+                <h2>New Arrivals in Sports</h2>
+                <div class="img1" style="background-image: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?w=500&auto=format&fit=crop');"></div>
+                <div class="card-footer">
+                    <a href="#" class="content-a">Shop Now <i class="fa-solid fa-chevron-right"></i></a>
+                    <button class="add-cart-btn" onclick="addToCart('Sports Gear')"><i class="fa-solid fa-cart-plus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Newsletter Section -->
+<div class="newsletter-section reveal">
+    <div class="newsletter-glow"></div>
+    <div class="newsletter-content">
+        <div class="newsletter-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+        <h2>Get Exclusive Deals in Your Inbox</h2>
+        <p>Subscribe and be the first to know about flash sales, new arrivals, and special offers.</p>
+        <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+            <input type="email" placeholder="Enter your email address..." required class="newsletter-input">
+            <button type="submit" class="newsletter-btn">Subscribe <i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+        <p class="newsletter-note"><i class="fa-solid fa-shield-halved"></i> No spam. Unsubscribe anytime.</p>
+    </div>
+</div>
+
+<!-- Feedback Button -->
+<button class="feedback-trigger" onclick="toggleFeedback()">
+    <i class="fa-solid fa-comment-dots"></i>
+    <span>Feedback</span>
+</button>
+
+<!-- Feedback Popup -->
+<div class="feedback-overlay" id="feedbackOverlay" onclick="closeFeedbackOverlay(event)">
+    <div class="feedback-modal">
+        <div class="feedback-header">
+            <div class="feedback-title">
+                <i class="fa-solid fa-comment-dots"></i>
+                <span>Share Your Feedback</span>
+            </div>
+            <button class="feedback-close" onclick="toggleFeedback()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <p class="feedback-sub">We'd love to hear what you think about NexCart!</p>
+        <div class="reaction-row">
+            <button class="reaction-btn" id="likeBtn" onclick="setReaction('like')">
+                <i class="fa-solid fa-thumbs-up"></i><span>Like it</span>
+            </button>
+            <button class="reaction-btn" id="dislikeBtn" onclick="setReaction('dislike')">
+                <i class="fa-solid fa-thumbs-down"></i><span>Dislike it</span>
+            </button>
+        </div>
+        <form id="feedbackForm" onsubmit="submitFeedback(event)">
+            <input type="hidden" name="reaction" id="reactionInput" value="Not selected">
+            <textarea name="message" id="feedbackText" class="feedback-textarea"
+                placeholder="Write your thoughts, suggestions or experience here..."
+                maxlength="500" required oninput="updateCharCount()"></textarea>
+            <div class="char-count"><span id="charCount">0</span> / 500</div>
+            <input type="email" name="email" class="feedback-email" placeholder="Your email (optional)" />
+            <button type="submit" class="feedback-submit" id="feedbackSubmitBtn">
+                <span class="submit-text">Send Feedback</span>
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </form>
+        <div class="feedback-success hidden" id="feedbackSuccess">
+            <i class="fa-solid fa-circle-check"></i>
+            <p>Thank you! Your feedback has been sent.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="foot1">
+        <a href="#" onclick="scrollToTop()">&#8593; Back to Top</a>
+    </div>
+    <div class="foot2">
+        <ul>
+            <p class="foot-heading">Online Shopping</p>
+            <a href="#">Men</a>
+            <a href="#">Women</a>
+            <a href="#">Kids</a>
+            <a href="#">Home &amp; Living</a>
+            <a href="#">Beauty</a>
+            <a href="#">Gift Cards</a>
+            <a href="#">NexCart Insider</a>
+        </ul>
+        <ul>
+            <p class="foot-heading">Connect with Us</p>
+            <a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a>
+            <a href="#"><i class="fa-brands fa-twitter"></i> Twitter</a>
+            <a href="https://www.instagram.com/_siddhartt" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
+            <a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a>
+        </ul>
+        <ul>
+            <p class="foot-heading">Make Money with Us</p>
+            <a href="#">Sell on NexCart</a>
+            <a href="#">Become an Affiliate</a>
+            <a href="#">Advertise Your Products</a>
+            <a href="#">NexCart Global Selling</a>
+            <a href="#">Fulfilment by NexCart</a>
+        </ul>
+        <ul>
+            <p class="foot-heading">Let Us Help You</p>
+            <a href="#">Your Account</a>
+            <a href="#">Returns Centre</a>
+            <a href="#">Purchase Protection</a>
+            <a href="#">NexCart App</a>
+            <a href="#">Help</a>
+        </ul>
+    </div>
+    <div class="foot3">
+        <span class="foot-logo">Nex<span class="logo-accent">Cart</span></span>
+        <p class="foot-copy">&copy; Made With ❤️ By <a href="https://www.instagram.com/_siddhartt" class="author-link" target="_blank">Siddharth Sharma</a></p>
+    </div>
+</footer>
+
+<script>
+// ── Page Loader ──
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const loader = document.getElementById('pageLoader');
+        loader.classList.add('fade-out');
+        setTimeout(() => loader.style.display = 'none', 500);
+    }, 1200);
+});
+
+// ── Scroll to Top ──
+window.addEventListener('scroll', () => {
+    const btn = document.getElementById('scrollTop');
+    btn.classList.toggle('visible', window.scrollY > 400);
+});
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Countdown Timer ──
+(function countdown() {
+    let end = new Date();
+    end.setHours(end.getHours() + 5, end.getMinutes() + 37, end.getSeconds() + 20);
+    function tick() {
+        const diff = end - new Date();
+        if (diff <= 0) { end = new Date(Date.now() + 6 * 3600000); return; }
+        const h = Math.floor(diff / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        document.getElementById('cdH').textContent = String(h).padStart(2,'0');
+        document.getElementById('cdM').textContent = String(m).padStart(2,'0');
+        document.getElementById('cdS').textContent = String(s).padStart(2,'0');
+    }
+    tick();
+    setInterval(tick, 1000);
+})();
+
+// ── Cart Counter ──
+let cartCount = 0;
+function addToCart(name) {
+    cartCount++;
+    document.getElementById('cartBadge').textContent = cartCount;
+    document.getElementById('cartBadge').classList.add('pop');
+    setTimeout(() => document.getElementById('cartBadge').classList.remove('pop'), 300);
+    showToast(`"${name}" added to cart!`, 'success');
+}
+
+// ── Toast Notifications ──
+function showToast(msg, type = 'success') {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    const icons = { success: 'circle-check', info: 'circle-info', error: 'circle-exclamation' };
+    toast.innerHTML = `<i class="fa-solid fa-${icons[type] || 'circle-check'}"></i><span>${msg}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => toast.classList.add('show'), 10);
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 400);
+    }, 3000);
+}
+
+// ── Live Search ──
+function liveSearch() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.content');
+    let found = 0;
+    cards.forEach(card => {
+        const title = card.querySelector('h2').textContent.toLowerCase();
+        const match = !query || title.includes(query);
+        card.style.display = match ? '' : 'none';
+        if (match) found++;
+    });
+    document.getElementById('noResults').classList.toggle('hidden', found > 0);
+}
+
+// ── Category Filter ──
+function filterProducts(cat, btn) {
+    const cards = document.querySelectorAll('.content');
+    const btns = document.querySelectorAll('.cat-btn');
+    btns.forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+
+    let found = 0;
+    cards.forEach(card => {
+        const match = cat === 'all' || card.dataset.category === cat;
+        card.style.display = match ? '' : 'none';
+        if (match) found++;
+    });
+    document.getElementById('noResults').classList.toggle('hidden', found > 0);
+    document.getElementById('searchInput').value = '';
+}
+
+// ── Scroll Reveal ──
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ── Newsletter ──
+function subscribeNewsletter(e) {
+    e.preventDefault();
+    const input = e.target.querySelector('input');
+    showToast(`Subscribed! Welcome to NexCart deals, ${input.value.split('@')[0]}!`, 'success');
+    e.target.reset();
+}
+
+// ── Feedback Popup ──
+let selectedReaction = '';
+function toggleFeedback() {
+    const overlay = document.getElementById('feedbackOverlay');
+    overlay.classList.toggle('active');
+    document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+}
+function closeFeedbackOverlay(e) {
+    if (e.target === document.getElementById('feedbackOverlay')) toggleFeedback();
+}
+function setReaction(type) {
+    selectedReaction = type;
+    document.getElementById('reactionInput').value = type === 'like' ? '👍 Like' : '👎 Dislike';
+    document.getElementById('likeBtn').classList.toggle('active', type === 'like');
+    document.getElementById('dislikeBtn').classList.toggle('active', type === 'dislike');
+}
+function updateCharCount() {
+    document.getElementById('charCount').textContent = document.getElementById('feedbackText').value.length;
+}
+function submitFeedback(e) {
+    e.preventDefault();
+    const btn = document.getElementById('feedbackSubmitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="submit-text">Sending...</span>';
+    const data = new FormData(document.getElementById('feedbackForm'));
+    // ⚠️ Replace YOUR_FORM_ID with your Formspree form ID
+    fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST', body: data, headers: { 'Accept': 'application/json' }
+    })
+    .then(res => {
+        if (res.ok) {
+            document.getElementById('feedbackForm').classList.add('hidden');
+            document.getElementById('feedbackSuccess').classList.remove('hidden');
+            setTimeout(() => {
+                toggleFeedback();
+                setTimeout(() => {
+                    document.getElementById('feedbackForm').classList.remove('hidden');
+                    document.getElementById('feedbackSuccess').classList.add('hidden');
+                    document.getElementById('feedbackForm').reset();
+                    updateCharCount();
+                    document.getElementById('likeBtn').classList.remove('active');
+                    document.getElementById('dislikeBtn').classList.remove('active');
+                    btn.disabled = false;
+                    btn.innerHTML = '<span class="submit-text">Send Feedback</span><i class="fa-solid fa-paper-plane"></i>';
+                }, 400);
+            }, 2200);
+        } else {
+            btn.disabled = false;
+            btn.innerHTML = '<span class="submit-text">Send Feedback</span><i class="fa-solid fa-paper-plane"></i>';
+            showToast('Something went wrong. Please try again.', 'error');
+        }
+    })
+    .catch(() => {
+        btn.disabled = false;
+        btn.innerHTML = '<span class="submit-text">Send Feedback</span><i class="fa-solid fa-paper-plane"></i>';
+        showToast('Network error. Please try again.', 'error');
+    });
+}
+</script>
+
+</body>
+</html>
